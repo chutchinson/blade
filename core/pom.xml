@@ -19,12 +19,12 @@
       <artifactId>blade-parent</artifactId>
       <version>4.0.0-SNAPSHOT</version>
     </parent>
-    
+
     <groupId>net.rpgtoolkit.blade</groupId>
-    <artifactId>blade-compiler</artifactId>
+    <artifactId>blade-core</artifactId>
     <version>${parent.version}</version>
     <packaging>jar</packaging>
-    <name>RPG Toolkit 4.x Blade Runtime</name>
+    <name>RPG Toolkit 4.x Blade Common</name>
     <inceptionYear>2015</inceptionYear>
 
     <properties>
