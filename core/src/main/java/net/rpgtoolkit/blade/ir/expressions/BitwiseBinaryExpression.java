@@ -9,6 +9,7 @@ package net.rpgtoolkit.blade.ir.expressions;
 
 import net.rpgtoolkit.blade.ir.Expression;
 import net.rpgtoolkit.blade.ir.NodeVisitor;
+import net.rpgtoolkit.blade.ir.SourceRange;
 
 public class BitwiseBinaryExpression extends BinaryExpression {
 
@@ -20,8 +21,8 @@ public class BitwiseBinaryExpression extends BinaryExpression {
 
     private Operator op;
 
-    public BitwiseBinaryExpression(Operator op, Expression lhs, Expression rhs) {
-        super(lhs, rhs);
+    public BitwiseBinaryExpression(SourceRange range, Operator op, Expression lhs, Expression rhs) {
+        super(range, lhs, rhs);
         setOperator(op);
     }
 

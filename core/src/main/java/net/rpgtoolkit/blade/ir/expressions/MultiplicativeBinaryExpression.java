@@ -9,6 +9,7 @@ package net.rpgtoolkit.blade.ir.expressions;
 
 import net.rpgtoolkit.blade.ir.Expression;
 import net.rpgtoolkit.blade.ir.NodeVisitor;
+import net.rpgtoolkit.blade.ir.SourceRange;
 
 public class MultiplicativeBinaryExpression extends BinaryExpression {
 
@@ -21,8 +22,8 @@ public class MultiplicativeBinaryExpression extends BinaryExpression {
 
     private Operator op;
 
-    public MultiplicativeBinaryExpression(Operator op, Expression left, Expression right) {
-        super(left, right);
+    public MultiplicativeBinaryExpression(SourceRange range, Operator op, Expression left, Expression right) {
+        super(range, left, right);
         this.op = op;
     }
 
