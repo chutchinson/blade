@@ -7,10 +7,12 @@
  */
 package net.rpgtoolkit.blade.ir.expressions;
 
+import net.rpgtoolkit.blade.ir.AbstractNode;
 import net.rpgtoolkit.blade.ir.Expression;
 import net.rpgtoolkit.blade.ir.NodeVisitor;
+import net.rpgtoolkit.blade.ir.SourceRange;
 
-public class AssignmentExpression implements Expression {
+public class AssignmentExpression extends AbstractNode implements Expression {
 
     public enum Operator {
         ASSIGN,
@@ -31,7 +33,8 @@ public class AssignmentExpression implements Expression {
     private Expression symbol;
     private Expression value;
 
-    public AssignmentExpression(Operator op, Expression sym, Expression value) {
+    public AssignmentExpression(SourceRange range, Operator op, Expression sym, Expression value) {
+        super(range);
         setOperator(op);
         setSymbolExpression(sym);
         setValueExpression(value);

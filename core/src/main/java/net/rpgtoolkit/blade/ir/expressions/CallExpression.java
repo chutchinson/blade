@@ -7,19 +7,22 @@
  */
 package net.rpgtoolkit.blade.ir.expressions;
 
+import net.rpgtoolkit.blade.ir.AbstractNode;
 import net.rpgtoolkit.blade.ir.Expression;
 import net.rpgtoolkit.blade.ir.NodeVisitor;
+import net.rpgtoolkit.blade.ir.SourceRange;
 
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CallExpression implements Expression {
+public class CallExpression extends AbstractNode implements Expression {
 
     private Expression target;
     private final List<Expression> arguments;
 
-    public CallExpression(Expression target, Collection<Expression> arguments) {
+    public CallExpression(SourceRange range, Expression target, Collection<Expression> arguments) {
+        super(range);
         this.arguments = new LinkedList<>();
         setTarget(target);
         setArguments(arguments);

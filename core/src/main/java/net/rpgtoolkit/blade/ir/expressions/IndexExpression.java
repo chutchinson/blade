@@ -7,16 +7,15 @@
  */
 package net.rpgtoolkit.blade.ir.expressions;
 
-import net.rpgtoolkit.blade.ir.Expression;
-import net.rpgtoolkit.blade.ir.Identifier;
-import net.rpgtoolkit.blade.ir.NodeVisitor;
+import net.rpgtoolkit.blade.ir.*;
 
-public class IndexExpression implements Expression {
+public class IndexExpression extends AbstractNode implements Expression {
 
     private Identifier symbol;
     private Expression index;
 
-    public IndexExpression(Identifier sym) {
+    public IndexExpression(SourceRange range, Identifier sym) {
+        super(range);
         setSymbol(sym);
     }
 

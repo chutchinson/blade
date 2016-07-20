@@ -10,15 +10,18 @@ package net.rpgtoolkit.blade.ir.statements;
 import net.rpgtoolkit.blade.ir.Block;
 import net.rpgtoolkit.blade.ir.Expression;
 import net.rpgtoolkit.blade.ir.NodeVisitor;
-import net.rpgtoolkit.blade.ir.Statement;
-import net.rpgtoolkit.blade.ir.expressions.RelationalBinaryExpression;
+import net.rpgtoolkit.blade.ir.SourceRange;
 
-public class ForLoopStatement implements Statement {
+public class ForLoopStatement extends AbstractStatement {
 
     private Expression initial;
     private Expression condition;
     private Expression iterator;
     private Block body;
+
+    public ForLoopStatement(SourceRange range) {
+        super(range);
+    }
 
     public Expression getInitialExpression() {
         return this.initial;

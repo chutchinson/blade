@@ -7,12 +7,9 @@
  */
 package net.rpgtoolkit.blade.ir.statements;
 
-import net.rpgtoolkit.blade.ir.Block;
-import net.rpgtoolkit.blade.ir.Expression;
-import net.rpgtoolkit.blade.ir.NodeVisitor;
-import net.rpgtoolkit.blade.ir.Statement;
+import net.rpgtoolkit.blade.ir.*;
 
-public class LoopStatement implements Statement {
+public class LoopStatement extends AbstractStatement {
 
     public enum LoopKind {
         DO,
@@ -24,7 +21,8 @@ public class LoopStatement implements Statement {
     private Expression condition;
     private Block body;
 
-    public LoopStatement(LoopKind kind, Expression condition) {
+    public LoopStatement(SourceRange range, LoopKind kind, Expression condition) {
+        super(range);
         setKind(kind);
         setCondition(condition);
     }

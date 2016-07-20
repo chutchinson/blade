@@ -7,13 +7,16 @@
  */
 package net.rpgtoolkit.blade.ir.expressions;
 
+import net.rpgtoolkit.blade.ir.AbstractNode;
 import net.rpgtoolkit.blade.ir.NodeVisitor;
+import net.rpgtoolkit.blade.ir.SourceRange;
 
-public class ConstantStringExpression implements ConstantExpression {
+public class ConstantStringExpression extends AbstractNode implements ConstantExpression {
 
     private String value;
 
-    public ConstantStringExpression(String value) {
+    public ConstantStringExpression(SourceRange range, String value) {
+        super(range);
         setValue(value);
     }
 

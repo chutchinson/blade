@@ -10,11 +10,12 @@ package net.rpgtoolkit.blade.ir;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Block implements Node {
+public class Block extends AbstractNode {
 
     private final List<Statement> statements;
 
-    public Block() {
+    public Block(SourceRange range) {
+        super(range);
         this.statements = new LinkedList<>();
     }
 

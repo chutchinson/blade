@@ -11,13 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class CompilationUnit implements Node {
+public class CompilationUnit extends AbstractNode {
 
     private final String name;
     private final List<ClassDeclaration> classes;
     private final List<FunctionDeclaration> functions;
 
-    public CompilationUnit(String name) {
+    public CompilationUnit(SourceRange range, String name) {
+        super(range);
         this.classes = new ArrayList<>();
         this.functions = new ArrayList<>();
         this.name = (name != null) ? name : generateUniqueName();

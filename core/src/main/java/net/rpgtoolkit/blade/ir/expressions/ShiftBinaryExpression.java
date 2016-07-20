@@ -9,6 +9,7 @@ package net.rpgtoolkit.blade.ir.expressions;
 
 import net.rpgtoolkit.blade.ir.Expression;
 import net.rpgtoolkit.blade.ir.NodeVisitor;
+import net.rpgtoolkit.blade.ir.SourceRange;
 
 public class ShiftBinaryExpression extends BinaryExpression {
 
@@ -19,8 +20,8 @@ public class ShiftBinaryExpression extends BinaryExpression {
 
     private Operator op;
 
-    public ShiftBinaryExpression(Operator op, Expression lhs, Expression rhs) {
-        super(lhs, rhs);
+    public ShiftBinaryExpression(SourceRange range, Operator op, Expression lhs, Expression rhs) {
+        super(range, lhs, rhs);
         setOperator(op);
     }
 

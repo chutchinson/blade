@@ -10,14 +10,15 @@ package net.rpgtoolkit.blade.ir;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassDeclaration implements Node {
+public class ClassDeclaration extends AbstractNode {
 
     private Identifier name;
     private final List<Identifier> inheritanceList;
     private final List<FunctionDeclaration> functions;
     private final List<ClassFieldDeclaration> fields;
 
-    public ClassDeclaration(Identifier name) {
+    public ClassDeclaration(SourceRange range, Identifier name) {
+        super(range);
         this.functions = new ArrayList<>();
         this.fields = new ArrayList<>();
         this.inheritanceList = new ArrayList<>();

@@ -7,13 +7,16 @@
  */
 package net.rpgtoolkit.blade.ir.expressions;
 
+import net.rpgtoolkit.blade.ir.AbstractNode;
 import net.rpgtoolkit.blade.ir.NodeVisitor;
+import net.rpgtoolkit.blade.ir.SourceRange;
 
-public class ConstantBooleanExpression implements ConstantExpression {
+public class ConstantBooleanExpression extends AbstractNode implements ConstantExpression {
 
     private boolean value;
 
-    public ConstantBooleanExpression(boolean value) {
+    public ConstantBooleanExpression(SourceRange range, boolean value) {
+        super(range);
         this.value = value;
     }
 

@@ -9,13 +9,14 @@ package net.rpgtoolkit.blade.ir.statements;
 
 import net.rpgtoolkit.blade.ir.Expression;
 import net.rpgtoolkit.blade.ir.NodeVisitor;
-import net.rpgtoolkit.blade.ir.Statement;
+import net.rpgtoolkit.blade.ir.SourceRange;
 
-public class ExpressionStatement implements Statement {
+public class ExpressionStatement extends AbstractStatement {
 
     private Expression expr;
 
-    public ExpressionStatement(Expression expr) {
+    public ExpressionStatement(SourceRange range, Expression expr) {
+        super(range);
         setExpression(expr);
     }
 

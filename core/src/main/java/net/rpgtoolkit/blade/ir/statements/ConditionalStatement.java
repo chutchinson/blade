@@ -7,17 +7,15 @@
  */
 package net.rpgtoolkit.blade.ir.statements;
 
-import net.rpgtoolkit.blade.ir.Block;
-import net.rpgtoolkit.blade.ir.Expression;
-import net.rpgtoolkit.blade.ir.NodeVisitor;
-import net.rpgtoolkit.blade.ir.Statement;
+import net.rpgtoolkit.blade.ir.*;
 
-public class ConditionalStatement implements Statement {
+public class ConditionalStatement extends AbstractStatement {
 
     private Expression condition;
     private Block body;
 
-    public ConditionalStatement(Expression expr, Block body) {
+    public ConditionalStatement(SourceRange range, Expression expr, Block body) {
+        super(range);
         setConditionExpression(expr);
         setBody(body);
     }

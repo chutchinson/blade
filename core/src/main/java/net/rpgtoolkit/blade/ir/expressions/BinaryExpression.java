@@ -7,14 +7,17 @@
  */
 package net.rpgtoolkit.blade.ir.expressions;
 
+import net.rpgtoolkit.blade.ir.AbstractNode;
 import net.rpgtoolkit.blade.ir.Expression;
+import net.rpgtoolkit.blade.ir.SourceRange;
 
-public abstract class BinaryExpression implements Expression {
+public abstract class BinaryExpression extends AbstractNode implements Expression {
 
     private Expression left;
     private Expression right;
 
-    public BinaryExpression(Expression left, Expression right) {
+    public BinaryExpression(SourceRange range, Expression left, Expression right) {
+        super(range);
         if (left == null || right == null)
             throw new IllegalArgumentException();
         this.left = left;

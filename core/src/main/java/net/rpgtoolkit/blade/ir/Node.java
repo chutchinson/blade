@@ -7,14 +7,10 @@
  */
 package net.rpgtoolkit.blade.ir;
 
-public abstract class Node {
+public interface Node {
 
-  protected SourceRange range;
+  SourceRange getSourceRange();
 
-  public SourceRange getSourceRange() {
-    return this.range;
-  }
-
-  public abstract void accept(final NodeVisitor visitor);
+  void accept(final NodeVisitor visitor);
 
 }

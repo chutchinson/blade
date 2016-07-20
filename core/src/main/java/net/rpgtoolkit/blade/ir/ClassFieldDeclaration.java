@@ -7,12 +7,13 @@
  */
 package net.rpgtoolkit.blade.ir;
 
-public class ClassFieldDeclaration implements Node {
+public class ClassFieldDeclaration extends AbstractNode {
 
     private Identifier name;
     private Visibility visibility;
 
-    public ClassFieldDeclaration(Identifier name) {
+    public ClassFieldDeclaration(SourceRange range, Identifier name) {
+        super(range);
         this.setName(name);
     }
 

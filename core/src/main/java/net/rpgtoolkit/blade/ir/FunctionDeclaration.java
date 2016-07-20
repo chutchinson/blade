@@ -10,7 +10,7 @@ package net.rpgtoolkit.blade.ir;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FunctionDeclaration implements Node {
+public class FunctionDeclaration extends AbstractNode {
 
   private Identifier name;
   private List<Parameter> parameters;
@@ -20,7 +20,8 @@ public class FunctionDeclaration implements Node {
   private boolean virtual;
   private boolean pure;
 
-  public FunctionDeclaration(Identifier name) {
+  public FunctionDeclaration(SourceRange range, Identifier name) {
+    super(range);
     if (name == null)
       throw new IllegalArgumentException();
     this.name = name;

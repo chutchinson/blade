@@ -7,13 +7,16 @@
  */
 package net.rpgtoolkit.blade.ir.expressions;
 
+import net.rpgtoolkit.blade.ir.AbstractNode;
 import net.rpgtoolkit.blade.ir.NodeVisitor;
+import net.rpgtoolkit.blade.ir.SourceRange;
 
-public class ConstantNumberExpression implements ConstantExpression {
+public class ConstantNumberExpression extends AbstractNode implements ConstantExpression {
 
     private double value;
 
-    public ConstantNumberExpression(double value) {
+    public ConstantNumberExpression(SourceRange range, double value) {
+        super(range);
         this.value = value;
     }
 

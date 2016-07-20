@@ -7,10 +7,12 @@
  */
 package net.rpgtoolkit.blade.ir.expressions;
 
+import net.rpgtoolkit.blade.ir.AbstractNode;
 import net.rpgtoolkit.blade.ir.Expression;
 import net.rpgtoolkit.blade.ir.NodeVisitor;
+import net.rpgtoolkit.blade.ir.SourceRange;
 
-public class UnaryExpression implements Expression {
+public class UnaryExpression extends AbstractNode implements Expression {
 
     public enum Operator {
         POSITIVE,
@@ -20,7 +22,8 @@ public class UnaryExpression implements Expression {
     private Operator op;
     private Expression expr;
 
-    public UnaryExpression(Operator op, Expression expr) {
+    public UnaryExpression(SourceRange range, Operator op, Expression expr) {
+        super(range);
         setOperator(op);
         setExpression(expr);
     }

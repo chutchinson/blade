@@ -7,14 +7,13 @@
  */
 package net.rpgtoolkit.blade.ir;
 
-public class Parameter implements Node {
+public class Parameter extends AbstractNode {
 
   private Identifier name;
 
-  public Parameter(Identifier name) {
-    if (name == null)
-      throw new IllegalArgumentException();
-    this.name = name;
+  public Parameter(SourceRange range, Identifier name) {
+    super(range);
+    this.setName(name);
   }
 
   public Identifier getName() {

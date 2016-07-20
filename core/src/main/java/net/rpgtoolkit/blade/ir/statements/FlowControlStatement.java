@@ -8,9 +8,9 @@
 package net.rpgtoolkit.blade.ir.statements;
 
 import net.rpgtoolkit.blade.ir.NodeVisitor;
-import net.rpgtoolkit.blade.ir.Statement;
+import net.rpgtoolkit.blade.ir.SourceRange;
 
-public class FlowControlStatement implements Statement {
+public class FlowControlStatement extends AbstractStatement {
 
     public enum FlowControlKind {
         BREAK,
@@ -20,7 +20,8 @@ public class FlowControlStatement implements Statement {
 
     private FlowControlKind kind;
 
-    public FlowControlStatement(FlowControlKind kind) {
+    public FlowControlStatement(SourceRange range, FlowControlKind kind) {
+        super(range);
         setKind(kind);
     }
 

@@ -7,10 +7,12 @@
  */
 package net.rpgtoolkit.blade.ir.expressions;
 
+import net.rpgtoolkit.blade.ir.AbstractNode;
 import net.rpgtoolkit.blade.ir.Expression;
 import net.rpgtoolkit.blade.ir.NodeVisitor;
+import net.rpgtoolkit.blade.ir.SourceRange;
 
-public class PostfixExpression implements Expression {
+public class PostfixExpression extends AbstractNode implements Expression {
 
     public enum Operator {
         INCREMENT,
@@ -20,7 +22,8 @@ public class PostfixExpression implements Expression {
     private Operator op;
     private Expression lhs;
 
-    public PostfixExpression(Operator op, Expression lhs) {
+    public PostfixExpression(SourceRange range, Operator op, Expression lhs) {
+        super(range);
         setOperator(op);
         setExpression(lhs);
     }

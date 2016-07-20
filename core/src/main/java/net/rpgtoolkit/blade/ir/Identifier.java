@@ -7,18 +7,13 @@
  */
 package net.rpgtoolkit.blade.ir;
 
-public class Identifier implements Expression {
+public class Identifier extends AbstractNode{
 
   private String value;
 
-  public static Identifier valueOf(String value) {
-    return new Identifier(value);
-  }
-
-  public Identifier(String value) {
-    if (value == null)
-      throw new IllegalArgumentException();
-    this.value = value;
+  public Identifier(SourceRange range, String value) {
+    super(range);
+    this.setValue(value);
   }
 
   public String getValue() {
