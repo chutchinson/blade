@@ -22,7 +22,6 @@
 
     <groupId>net.rpgtoolkit.blade</groupId>
     <artifactId>blade-core</artifactId>
-    <version>${parent.version}</version>
     <packaging>jar</packaging>
     <name>RPG Toolkit 4.x Blade Common</name>
     <inceptionYear>2015</inceptionYear>

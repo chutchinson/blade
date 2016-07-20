@@ -22,7 +22,6 @@
     
     <groupId>net.rpgtoolkit.blade</groupId>
     <artifactId>blade-compiler</artifactId>
-    <version>${parent.version}</version>
     <packaging>jar</packaging>
     <name>RPG Toolkit 4.x Blade Compiler</name>
     <inceptionYear>2015</inceptionYear>
@@ -42,6 +41,7 @@
         <dependency>
             <groupId>net.rpgtoolkit.blade</groupId>
             <artifactId>blade-core</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
