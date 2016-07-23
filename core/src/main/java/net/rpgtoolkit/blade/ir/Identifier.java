@@ -7,7 +7,7 @@
  */
 package net.rpgtoolkit.blade.ir;
 
-public class Identifier extends AbstractNode{
+public class Identifier extends AbstractNode implements Expression {
 
   private String value;
 

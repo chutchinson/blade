@@ -12,6 +12,12 @@ public class SourceRange {
   private SourceLocation start;
   private SourceLocation end;
 
+  public static SourceRange empty() {
+    return new SourceRange(
+        new SourceLocation(0, 0, 0),
+        new SourceLocation(0, 0, 0));
+  }
+
   public static SourceRange build(SourceLocation start, SourceLocation end) {
     return new SourceRange(start, end);
   }
@@ -23,6 +29,11 @@ public class SourceRange {
 
   public SourceLocation getStartLocation() {
     return this.start;
+  }
+
+  public void set(SourceLocation start, SourceLocation end) {
+    this.setStartLocation(start);
+    this.setEndLocation(end);
   }
 
   public final void setStartLocation(SourceLocation location) {
