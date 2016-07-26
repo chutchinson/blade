@@ -9,6 +9,9 @@ package net.rpgtoolkit.blade.compiler;
 
 /**
  * Interface representing a single compiler pass.
+ *
+ * @author Chris Hutchinson
+ * @since 4.0.0
  */
 public interface CompilerPass {
 

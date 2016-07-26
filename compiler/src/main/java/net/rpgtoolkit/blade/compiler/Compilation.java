@@ -13,6 +13,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Represents a compiler context and stores information on compilation of a single Blade module
+ * including IR representations, compiler messages (errors, warnings, hints), compilation
+ * options, generated code, and the current state of the compiler.
+ *
+ * @author Chris Hutchinson
+ * @since 4.0.0
+ */
 public class Compilation {
 
     private final BladeCompiler compiler;

@@ -7,27 +7,16 @@
  */
 package net.rpgtoolkit.blade.compiler;
 
+/**
+ * Exception for fatal compiler errors.
+ *
+ * @author Chris Hutchinson
+ * @since 4.0.0
+ */
 public class CompilerException extends Exception {
 
-    private final CompilerMessage error;
-
-    public CompilerException(CompilerMessage error) {
-        if (error == null)
-            throw new IllegalArgumentException();
-        this.error = error;
-    }
-
-    public int getCode() {
-        return this.error.getCode();
-    }
-
-    public CompilerMessage getError() {
-        return this.error;
-    }
-
-    @Override
-    public String getMessage() {
-        return this.error.getMessage();
-    }
+  public CompilerException(String message) {
+    super(message);
+  }
 
 }

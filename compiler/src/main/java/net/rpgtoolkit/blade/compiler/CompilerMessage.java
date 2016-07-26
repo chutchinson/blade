@@ -7,9 +7,18 @@
  */
 package net.rpgtoolkit.blade.compiler;
 
+/**
+ * A user-friendly compiler message issued during compilation.
+ *
+ * @author Chris Hutchinson
+ * @since 4.0.0
+ */
 public class CompilerMessage {
 
-    public enum Severity {
+  /**
+   * Severity (importance) of the compiler message.
+   */
+  public enum Severity {
 
         INFO,
         WARNING,

@@ -7,10 +7,27 @@
  */
 package net.rpgtoolkit.blade.compiler;
 
+/**
+ * Compilation mode that affects compiler analysis and code generation.
+ *
+ * @author Chris Hutchinson
+ * @since 4.0.0
+ */
 public enum CompilationMode {
 
-    AUTO,
-    LEGACY,
-    FUTURE;
+  /**
+   * Constant that informs the compiler to infer the compilation mode.
+   */
+  AUTO,
+
+  /**
+   * Enables legacy compilation for archaic programs.
+   */
+  LEGACY,
+
+  /**
+   * Enables experimental compiler features.
+   */
+  EXPERIMENTAL
 
 }

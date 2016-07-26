@@ -7,6 +7,14 @@
  */
 package net.rpgtoolkit.blade.compiler;
 
+/**
+ * Collection of compiler options that affect the method in which the compiler
+ * performs analysis, presents messages, generates code, and various other
+ * activities.
+ *
+ * @author Chris Hutchinson
+ * @since 4.0.0
+ */
 public class CompilationOptions {
 
     private boolean autolocal;

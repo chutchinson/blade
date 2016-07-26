@@ -8,6 +8,7 @@ import java.util.Map;
 /**
  * Scoped symbol table.
  *
+ * @author Chris Hutchinson
  * @since 4.0.0
  */
 public class Scope {
