@@ -19,6 +19,8 @@ public class Compilation {
     private final CompilationOptions options;
     private final CompilationUnit unit;
     private final List<CompilerMessage> messages;
+    private final Scope scope;
+    private boolean errors;
 
     public Compilation(BladeCompiler compiler, CompilationOptions options, CompilationUnit unit) {
         if (compiler == null)
@@ -29,6 +31,16 @@ public class Compilation {
         this.options = (options != null) ? options : CompilationOptions.getDefaults();
         this.messages = new ArrayList<>();
         this.unit = unit;
+        this.scope = new Scope(null);
+        this.errors = false;
+    }
+
+    public boolean hasErrors() {
+        return this.errors;
+    }
+
+    public Scope getGlobalScope() {
+        return this.scope;
     }
 
     public Collection<CompilerMessage> getMessages() {
@@ -50,6 +62,9 @@ public class Compilation {
     public void message(CompilerMessage msg) {
         if (msg == null)
             throw new IllegalArgumentException();
+        final CompilerMessage.Severity severity = msg.getSeverity();
+        if (severity == CompilerMessage.Severity.ERROR || severity == CompilerMessage.Severity.FATAL)
+            this.errors = true;
         this.messages.add(msg);
     }
 

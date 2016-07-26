@@ -7,6 +7,7 @@
  */
 package net.rpgtoolkit.blade.compiler;
 
+import net.rpgtoolkit.blade.compiler.passes.SemanticAnalysisPass;
 import net.rpgtoolkit.blade.ir.CompilationUnit;
 
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ public class BladeCompiler {
         for (final CompilerPass pass : passes) {
             pass.initialize(compilation);
             pass.process(compilation);
+            if (compilation.hasErrors())
+              break;
         }
 
         return compilation;
@@ -40,7 +43,7 @@ public class BladeCompiler {
     }
 
     private final void initialize() {
-
+        passes.add(new SemanticAnalysisPass());
     }
 
 }

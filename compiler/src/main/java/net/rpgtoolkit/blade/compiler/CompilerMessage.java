@@ -56,7 +56,7 @@ public class CompilerMessage {
 
     @Override
     public String toString() {
-        return String.format("(%04d) %s: %s", code, severity, message);
+        return String.format("(%04d, %04d) %s %04d: %s", line, column, severity, code, message);
     }
 
 }
