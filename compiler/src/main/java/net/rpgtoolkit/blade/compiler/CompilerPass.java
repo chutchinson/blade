@@ -7,10 +7,13 @@
  */
 package net.rpgtoolkit.blade.compiler;
 
+/**
+ * Interface representing a single compiler pass.
+ */
 public interface CompilerPass {
 
-    void initialize(Compilation context);
+  void initialize(Compilation context);
 
-    void process(Compilation context) throws CompilerException;
+  void process(Compilation context) throws CompilerException;
 
 }
