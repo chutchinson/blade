@@ -13,31 +13,32 @@ import net.rpgtoolkit.blade.ir.SourceRange;
 
 public class MultiplicativeBinaryExpression extends BinaryExpression {
 
-    public enum Operator {
-        MULTIPLY,
-        DIVIDE,
-        MODULUS,
-        POWER
-    }
+  public enum Operator {
+    MULTIPLY,
+    DIVIDE,
+    DIVIDE_INT,
+    MODULUS,
+    POWER
+  }
 
-    private Operator op;
+  private Operator op;
 
-    public MultiplicativeBinaryExpression(SourceRange range, Operator op, Expression left, Expression right) {
-        super(range, left, right);
-        this.op = op;
-    }
+  public MultiplicativeBinaryExpression(SourceRange range, Operator op, Expression left, Expression right) {
+    super(range, left, right);
+    this.op = op;
+  }
 
-    public Operator getOperator() {
-        return this.op;
-    }
+  public Operator getOperator() {
+    return this.op;
+  }
 
-    public void setOperator(Operator op) {
-        this.op = op;
-    }
+  public void setOperator(Operator op) {
+    this.op = op;
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }

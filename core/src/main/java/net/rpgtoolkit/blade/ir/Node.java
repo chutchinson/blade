@@ -7,9 +7,15 @@
  */
 package net.rpgtoolkit.blade.ir;
 
+import net.rpgtoolkit.blade.ir.symbols.Symbol;
+
 public interface Node {
 
   SourceRange getSourceRange();
+
+  Symbol getSymbol();
+
+  void setSymbol(Symbol sym);
 
   void accept(final NodeVisitor visitor);
 

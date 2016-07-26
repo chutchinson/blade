@@ -11,22 +11,22 @@ import net.rpgtoolkit.blade.ir.*;
 
 public class IndexExpression extends AbstractNode implements Expression {
 
-    private Identifier symbol;
+    private Identifier identifier;
     private Expression index;
 
-    public IndexExpression(SourceRange range, Identifier sym) {
+    public IndexExpression(SourceRange range, Identifier ident) {
         super(range);
-        setSymbol(sym);
+        setIdentifier(ident);
     }
 
-    public Identifier getSymbol() {
-        return this.symbol;
+    public Identifier getIdentifier() {
+        return this.identifier;
     }
 
-    public void setSymbol(Identifier sym) {
-        if (sym == null)
+    public void setIdentifier(Identifier ident) {
+        if (ident == null)
             throw new IllegalArgumentException();
-        this.symbol = sym;
+        this.identifier = ident;
     }
 
     public Expression getIndexExpression() {

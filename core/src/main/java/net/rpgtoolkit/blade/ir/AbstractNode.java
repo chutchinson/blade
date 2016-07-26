@@ -7,14 +7,25 @@
  */
 package net.rpgtoolkit.blade.ir;
 
+import net.rpgtoolkit.blade.ir.symbols.Symbol;
+
 public abstract class AbstractNode implements Node {
 
   protected final SourceRange range;
+  private Symbol symbol;
 
   public AbstractNode(SourceRange range) {
     if (range == null)
       throw new IllegalArgumentException();
     this.range = range;
+  }
+
+  public Symbol getSymbol() {
+    return this.symbol;
+  }
+
+  public void setSymbol(Symbol sym) {
+    this.symbol = sym;
   }
 
   public SourceRange getSourceRange() {
