@@ -29,6 +29,7 @@ public interface NodeVisitor {
   void visit(ForLoopStatement node);
   void visit(FlowControlStatement node);
   void visit(LabelStatement node);
+  void visit(ErrorHandlerStatement node);
 
   // expressions
 

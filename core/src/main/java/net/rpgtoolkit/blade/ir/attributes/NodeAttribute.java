@@ -5,20 +5,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
-package net.rpgtoolkit.blade.ir;
+package net.rpgtoolkit.blade.ir.attributes;
 
-import net.rpgtoolkit.blade.ir.symbols.Symbol;
+public interface NodeAttribute {
 
-public interface Node {
-
-  SourceRange getSourceRange();
-
-  NodeAttributeCollection getAttributes();
-
-  Symbol getSymbol();
-
-  void setSymbol(Symbol sym);
-
-  void accept(final NodeVisitor visitor);
+  int getId();
 
 }
