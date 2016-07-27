@@ -7,6 +7,4 @@ public interface ScopedSymbol extends Symbol {
 
   Scope getScope();
 
-  void setScope(Scope scope);
-
 }

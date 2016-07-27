@@ -6,18 +6,15 @@ import net.rpgtoolkit.blade.ir.SourceRange;
 public abstract class AbstractScopedSymbol
     extends AbstractSymbol implements ScopedSymbol {
 
-  private Scope scope;
+  private final Scope scope;
 
-  public AbstractScopedSymbol(SourceRange range, String name) {
+  public AbstractScopedSymbol(Scope enclosing, SourceRange range, String name) {
     super(range, name);
+    this.scope = new Scope(enclosing);
   }
 
   public Scope getScope() {
     return this.scope;
-  }
-
-  public void setScope(Scope scope) {
-    this.scope = scope;
   }
 
 }
