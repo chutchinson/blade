@@ -1,30 +1,48 @@
+/**
+ * Copyright (c) 2015, rpgtoolkit.net <help@rpgtoolkit.net>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
 package net.rpgtoolkit.blade.compiler.passes;
 
+import com.sun.org.apache.xpath.internal.compiler.Compiler;
+
 import net.rpgtoolkit.blade.compiler.*;
+import net.rpgtoolkit.blade.compiler.attributes.UnreachableCodeAttribute;
 import net.rpgtoolkit.blade.compiler.symbols.FunctionSymbol;
 import net.rpgtoolkit.blade.compiler.symbols.ProgramSymbol;
 import net.rpgtoolkit.blade.compiler.symbols.VariableSymbol;
 import net.rpgtoolkit.blade.ir.AbstractNodeVisitor;
+import net.rpgtoolkit.blade.ir.Block;
 import net.rpgtoolkit.blade.ir.CompilationUnit;
 import net.rpgtoolkit.blade.ir.FunctionDeclaration;
 import net.rpgtoolkit.blade.ir.Identifier;
+import net.rpgtoolkit.blade.ir.NodeCollection;
 import net.rpgtoolkit.blade.ir.Parameter;
 import net.rpgtoolkit.blade.ir.SourceLocation;
 import net.rpgtoolkit.blade.ir.Statement;
 import net.rpgtoolkit.blade.ir.expressions.AssignmentExpression;
-import net.rpgtoolkit.blade.ir.expressions.ConstantNumberExpression;
-import net.rpgtoolkit.blade.ir.expressions.MultiplicativeBinaryExpression;
+import net.rpgtoolkit.blade.ir.statements.ErrorHandlerStatement;
 import net.rpgtoolkit.blade.ir.statements.ExpressionStatement;
+import net.rpgtoolkit.blade.ir.statements.FlowControlStatement;
+import net.rpgtoolkit.blade.ir.statements.ForLoopStatement;
+import net.rpgtoolkit.blade.ir.statements.LoopStatement;
+import net.rpgtoolkit.blade.ir.statements.ReturnStatement;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Encapsulates the semantic analysis phase of the Blade compiler. This pass performs the
  * following actions:
  *
  * <ul>
- *   <li>Detect common mistakes</li>
- *   <li>Detect duplicate declarations</li>
- *   <li>Detect invalid IR expression trees</li>
- *   <li>Type checking</li>
+ * <li>Detect common mistakes</li>
+ * <li>Detect duplicate declarations</li>
+ * <li>Detect invalid IR expression trees</li>
+ * <li>Type checking</li>
  * </ul>
  *
  * @author Chris Hutchinson
@@ -40,7 +58,7 @@ public class SemanticAnalysisPass implements CompilerPass {
 
     public void visit(CompilationUnit unit) {
 
-      // create a top-level program symbol
+      // define a top-level program symbol
 
       final Scope globalScope = context.getGlobalScope();
       final ProgramSymbol symbol = new ProgramSymbol(globalScope,
@@ -51,7 +69,7 @@ public class SemanticAnalysisPass implements CompilerPass {
       currentScope = globalScope;
       currentProgram = symbol;
 
-      // create function symbols
+      // define function symbols
 
       for (final FunctionDeclaration fn : unit.getFunctionDeclarations()) {
         currentScope = symbol.getScope();
@@ -83,16 +101,17 @@ public class SemanticAnalysisPass implements CompilerPass {
       currentFunction = symbol;
       currentScope = symbol.getScope();
 
-      // create function parameter symbols
+      // define function parameter symbols
 
       for (final Parameter param : node.getParameters()) {
         param.accept(this);
       }
 
-      // create function body symbols
+      // define function body symbols
 
       if (node.getBody() != null) {
-        for (final Statement stmt : node.getBody().getStatements()) {
+        final NodeCollection<Statement> statements = node.getBody().getStatements();
+        for (final Statement stmt : statements) {
           stmt.accept(this);
         }
       }
@@ -153,48 +172,68 @@ public class SemanticAnalysisPass implements CompilerPass {
 
   }
 
-  private class LogicalAnalysisVisitor extends AbstractNodeVisitor {
+  private class FlowControlVisitor extends AbstractNodeVisitor {
 
-    public void visit(CompilationUnit node) {
+    private boolean insideLoop = false;
+    private boolean returned = false;
 
-      for (final FunctionDeclaration fn : node.getFunctionDeclarations()) {
-        fn.accept(this);
-      }
+    public void visit(ReturnStatement node) {
 
-    }
-
-    public void visit(FunctionDeclaration node) {
-
-      if (node.getBody() != null) {
-        for (final Statement stmt : node.getBody().getStatements()) {
-          stmt.accept(this);
-        }
-      }
+      returned = true;
 
     }
 
-    public void visit(ExpressionStatement node) {
+    public void visit(ForLoopStatement node) {
 
-      node.getExpression().accept(this);
+      insideLoop = true;
+      node.getBody().accept(this);
+      insideLoop = false;
 
     }
 
-    public void visit(MultiplicativeBinaryExpression node) {
+    public void visit(LoopStatement node) {
 
-      // forbid division by zero
+      insideLoop = true;
+      node.getBody().accept(this);
+      insideLoop = false;
 
-      if (node.getRightExpression() instanceof ConstantNumberExpression) {
-        final ConstantNumberExpression rhs = (ConstantNumberExpression) node.getRightExpression();
-        if (rhs.getValue() == 0) {
-          switch (node.getOperator()) {
-            case DIVIDE:
-            case DIVIDE_INT:
-            case MODULUS:
-              context.message(CompilerMessageFactory.error(0x00, node.getSourceRange(),
-                  "division by zero"));
-              return;
+    }
+
+    public void visit(FlowControlStatement node) {
+
+      // detect break / continue statements outside of loops
+
+      switch (node.getKind()) {
+        case BREAK:
+        case CONTINUE:
+          if (!insideLoop) {
+            node.getAttributes().put(
+                new UnreachableCodeAttribute(UnreachableCodeAttribute.Reason.UNNESTED));
+            context.message(CompilerMessageFactory.error(
+                0x00, node.getSourceRange(), "flow control outside of loop"));
           }
+          returned = true;
+          break;
+      }
+
+    }
+
+    public void visit(Block node) {
+
+      returned = false;
+
+      final NodeCollection<Statement> statements = node.getStatements();
+
+      // detect unreachable code
+
+      for (final Statement stmt : statements) {
+        if (returned) {
+          node.getAttributes().put(
+              new UnreachableCodeAttribute(UnreachableCodeAttribute.Reason.FOLLOWS_RETURN));
+          context.message(CompilerMessageFactory.warn(
+              0x00, stmt.getSourceRange(), "unreachable code"));
         }
+        stmt.accept(this);
       }
 
     }
@@ -203,6 +242,7 @@ public class SemanticAnalysisPass implements CompilerPass {
 
   private Compilation context;
   private SymbolDefinitionVisitor symbolDefinitionVisitor;
+  private FlowControlVisitor flowControlVisitor;
 
   @Override
   public void initialize(Compilation context) {
@@ -210,11 +250,14 @@ public class SemanticAnalysisPass implements CompilerPass {
       throw new IllegalArgumentException();
     this.context = context;
     this.symbolDefinitionVisitor = new SymbolDefinitionVisitor();
+    this.flowControlVisitor = new FlowControlVisitor();
   }
 
   @Override
   public void process(Compilation context) throws CompilerException {
-
+    final CompilationUnit unit = context.getCompilationUnit();
+    unit.accept(this.symbolDefinitionVisitor);
+    unit.accept(this.flowControlVisitor);
   }
 
 }
