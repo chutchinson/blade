@@ -9,35 +9,35 @@ package net.rpgtoolkit.blade.ir;
 
 public class ClassFieldDeclaration extends AbstractNode {
 
-    private Identifier name;
-    private Visibility visibility;
+  private Identifier name;
+  private Visibility visibility;
 
-    public ClassFieldDeclaration(SourceRange range, Identifier name) {
-        super(range);
-        this.setName(name);
-    }
+  public ClassFieldDeclaration(SourceRange range, Identifier name) {
+    super(range);
+    this.setName(name);
+  }
 
-    public Identifier getName() {
-        return this.name;
-    }
+  public Identifier getName() {
+    return this.name;
+  }
 
-    public void setName(Identifier name) {
-        if (name == null)
-            throw new IllegalArgumentException();
-        this.name = name;
-    }
+  public void setName(Identifier name) {
+    if (name == null)
+      throw new IllegalArgumentException();
+    this.name = name;
+  }
 
-    public Visibility getVisibility() {
-        return this.visibility;
-    }
+  public Visibility getVisibility() {
+    return this.visibility;
+  }
 
-    public void setVisibility(Visibility visibility) {
-        this.visibility = visibility;
-    }
+  public void setVisibility(Visibility visibility) {
+    this.visibility = visibility;
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }

@@ -13,23 +13,26 @@ import net.rpgtoolkit.blade.ir.SourceRange;
 
 public class ReturnStatement extends AbstractStatement {
 
-    private Expression expr;
+  private Expression expr;
 
-    public ReturnStatement(SourceRange range) {
-        super(range);
-    }
+  public ReturnStatement(SourceRange range) {
+    super(range);
+  }
 
-    public Expression getExpression() {
-        return this.expr;
-    }
+  public Expression getExpression() {
+    return this.expr;
+  }
 
-    public void setExpression(Expression expr) {
-        this.expr = expr;
+  public void setExpression(Expression expr) {
+    this.expr = expr;
+    if (this.expr != null) {
+      this.expr.setParent(this);
     }
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }

@@ -13,33 +13,33 @@ import net.rpgtoolkit.blade.ir.SourceRange;
 
 public class RelationalBinaryExpression extends BinaryExpression {
 
-    public enum Operator {
-        GT,
-        GTE,
-        LT,
-        LTE,
-        EQ,
-        NEQ
-    }
+  public enum Operator {
+    GT,
+    GTE,
+    LT,
+    LTE,
+    EQ,
+    NEQ
+  }
 
-    private Operator op;
+  private Operator op;
 
-    public RelationalBinaryExpression(SourceRange range, Operator op, Expression left, Expression right) {
-        super(range, left, right);
-        this.op = op;
-    }
+  public RelationalBinaryExpression(SourceRange range, Operator op, Expression left, Expression right) {
+    super(range, left, right);
+    this.op = op;
+  }
 
-    public Operator getOperator() {
-        return this.op;
-    }
+  public Operator getOperator() {
+    return this.op;
+  }
 
-    public void setOperator(Operator op) {
-        this.op = op;
-    }
+  public void setOperator(Operator op) {
+    this.op = op;
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }

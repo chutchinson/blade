@@ -14,39 +14,42 @@ import net.rpgtoolkit.blade.ir.SourceRange;
 
 public class PostfixExpression extends AbstractNode implements Expression {
 
-    public enum Operator {
-        INCREMENT,
-        DECREMENT
-    }
+  public enum Operator {
+    INCREMENT,
+    DECREMENT
+  }
 
-    private Operator op;
-    private Expression lhs;
+  private Operator op;
+  private Expression lhs;
 
-    public PostfixExpression(SourceRange range, Operator op, Expression lhs) {
-        super(range);
-        setOperator(op);
-        setExpression(lhs);
-    }
+  public PostfixExpression(SourceRange range, Operator op, Expression lhs) {
+    super(range);
+    setOperator(op);
+    setExpression(lhs);
+  }
 
-    public Operator getOperator() {
-        return this.op;
-    }
+  public Operator getOperator() {
+    return this.op;
+  }
 
-    public void setOperator(Operator op) {
-        this.op = op;
-    }
+  public void setOperator(Operator op) {
+    this.op = op;
+  }
 
-    public Expression getExpression() {
-        return this.lhs;
-    }
+  public Expression getExpression() {
+    return this.lhs;
+  }
 
-    public void setExpression(Expression expr) {
-        this.lhs = expr;
-    }
+  public void setExpression(Expression expr) {
+    if (expr == null)
+      throw new IllegalArgumentException();
+    this.lhs = expr;
+    this.lhs.setParent(this);
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }

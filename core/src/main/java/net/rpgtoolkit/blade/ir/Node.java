@@ -11,6 +11,10 @@ import net.rpgtoolkit.blade.ir.symbols.Symbol;
 
 public interface Node {
 
+  Node getParent();
+
+  void setParent(Node node);
+
   SourceRange getSourceRange();
 
   NodeAttributeCollection getAttributes();

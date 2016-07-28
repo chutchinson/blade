@@ -12,5 +12,4 @@ import net.rpgtoolkit.blade.ir.Expression;
 public interface ConstantExpression extends Expression {
 
 
-
 }

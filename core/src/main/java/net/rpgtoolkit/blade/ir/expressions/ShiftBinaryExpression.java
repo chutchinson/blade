@@ -13,29 +13,29 @@ import net.rpgtoolkit.blade.ir.SourceRange;
 
 public class ShiftBinaryExpression extends BinaryExpression {
 
-    public enum Operator {
-        SHL,
-        SHR
-    }
+  public enum Operator {
+    SHL,
+    SHR
+  }
 
-    private Operator op;
+  private Operator op;
 
-    public ShiftBinaryExpression(SourceRange range, Operator op, Expression lhs, Expression rhs) {
-        super(range, lhs, rhs);
-        setOperator(op);
-    }
+  public ShiftBinaryExpression(SourceRange range, Operator op, Expression lhs, Expression rhs) {
+    super(range, lhs, rhs);
+    setOperator(op);
+  }
 
-    public Operator getOperator() {
-        return this.op;
-    }
+  public Operator getOperator() {
+    return this.op;
+  }
 
-    public void setOperator(Operator op) {
-        this.op = op;
-    }
+  public void setOperator(Operator op) {
+    this.op = op;
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }

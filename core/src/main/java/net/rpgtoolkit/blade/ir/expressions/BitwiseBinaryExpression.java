@@ -13,30 +13,30 @@ import net.rpgtoolkit.blade.ir.SourceRange;
 
 public class BitwiseBinaryExpression extends BinaryExpression {
 
-    public enum Operator {
-        AND,
-        OR,
-        XOR
-    }
+  public enum Operator {
+    AND,
+    OR,
+    XOR
+  }
 
-    private Operator op;
+  private Operator op;
 
-    public BitwiseBinaryExpression(SourceRange range, Operator op, Expression lhs, Expression rhs) {
-        super(range, lhs, rhs);
-        setOperator(op);
-    }
+  public BitwiseBinaryExpression(SourceRange range, Operator op, Expression lhs, Expression rhs) {
+    super(range, lhs, rhs);
+    setOperator(op);
+  }
 
-    public Operator getOperator() {
-        return this.op;
-    }
+  public Operator getOperator() {
+    return this.op;
+  }
 
-    public void setOperator(Operator op) {
-        this.op = op;
-    }
+  public void setOperator(Operator op) {
+    this.op = op;
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }

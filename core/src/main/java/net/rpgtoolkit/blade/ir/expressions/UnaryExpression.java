@@ -14,41 +14,42 @@ import net.rpgtoolkit.blade.ir.SourceRange;
 
 public class UnaryExpression extends AbstractNode implements Expression {
 
-    public enum Operator {
-        POSITIVE,
-        NEGATIVE
-    }
+  public enum Operator {
+    POSITIVE,
+    NEGATIVE
+  }
 
-    private Operator op;
-    private Expression expr;
+  private Operator op;
+  private Expression expr;
 
-    public UnaryExpression(SourceRange range, Operator op, Expression expr) {
-        super(range);
-        setOperator(op);
-        setExpression(expr);
-    }
+  public UnaryExpression(SourceRange range, Operator op, Expression expr) {
+    super(range);
+    setOperator(op);
+    setExpression(expr);
+  }
 
-    public Operator getOperator() {
-        return this.op;
-    }
+  public Operator getOperator() {
+    return this.op;
+  }
 
-    public void setOperator(Operator op) {
-        this.op = op;
-    }
+  public void setOperator(Operator op) {
+    this.op = op;
+  }
 
-    public Expression getExpression() {
-        return this.expr;
-    }
+  public Expression getExpression() {
+    return this.expr;
+  }
 
-    public void setExpression(Expression expr) {
-        if (expr == null)
-            throw new IllegalArgumentException();
-        this.expr = expr;
-    }
+  public void setExpression(Expression expr) {
+    if (expr == null)
+      throw new IllegalArgumentException();
+    this.expr = expr;
+    this.expr.setParent(this);
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }

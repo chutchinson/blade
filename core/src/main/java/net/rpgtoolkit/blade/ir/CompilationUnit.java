@@ -13,36 +13,36 @@ import java.util.UUID;
 
 public class CompilationUnit extends AbstractNode {
 
-    private final String name;
-    private final List<ClassDeclaration> classes;
-    private final List<FunctionDeclaration> functions;
+  private final String name;
+  private final List<ClassDeclaration> classes;
+  private final List<FunctionDeclaration> functions;
 
-    public CompilationUnit(SourceRange range, String name) {
-        super(range);
-        this.classes = new ArrayList<>();
-        this.functions = new ArrayList<>();
-        this.name = (name != null) ? name : generateUniqueName();
-    }
+  public CompilationUnit(SourceRange range, String name) {
+    super(range);
+    this.classes = new ArrayList<>();
+    this.functions = new ArrayList<>();
+    this.name = (name != null) ? name : generateUniqueName();
+  }
 
-    public String getName() {
-        return this.name;
-    }
+  public String getName() {
+    return this.name;
+  }
 
-    public List<ClassDeclaration> getClassDeclarations() {
-        return this.classes;
-    }
+  public List<ClassDeclaration> getClassDeclarations() {
+    return this.classes;
+  }
 
-    public List<FunctionDeclaration> getFunctionDeclarations() {
-        return this.functions;
-    }
+  public List<FunctionDeclaration> getFunctionDeclarations() {
+    return this.functions;
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
-    private static final String generateUniqueName() {
-        return UUID.randomUUID().toString();
-    }
+  private static final String generateUniqueName() {
+    return UUID.randomUUID().toString();
+  }
 
 }

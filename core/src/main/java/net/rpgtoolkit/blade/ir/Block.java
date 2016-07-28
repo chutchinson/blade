@@ -7,25 +7,52 @@
  */
 package net.rpgtoolkit.blade.ir;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Block extends AbstractNode {
+public class Block extends AbstractNode
+    implements Iterable<Statement> {
 
-    private final List<Statement> statements;
+  private final List<Statement> statements;
 
-    public Block(SourceRange range) {
-        super(range);
-        this.statements = new LinkedList<>();
+  public Block(SourceRange range) {
+    super(range);
+    this.statements = new LinkedList<>();
+  }
+
+  public int size() {
+    return this.statements.size();
+  }
+
+  public boolean contains(Statement stmt) {
+    return this.statements.contains(stmt);
+  }
+
+  public Statement get(int index) {
+    return this.statements.get(index);
+  }
+
+  public void add(Statement stmt) {
+    if (stmt != null) {
+      stmt.setParent(this);
+      this.statements.add(stmt);
     }
+  }
 
-    public List<Statement> getStatements() {
-        return this.statements;
+  public void remove(Statement stmt) {
+    if (this.statements.remove(stmt)) {
+      stmt.setParent(null);
     }
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
+  @Override
+  public Iterator<Statement> iterator() {
+    return this.statements.iterator();
+  }
 }

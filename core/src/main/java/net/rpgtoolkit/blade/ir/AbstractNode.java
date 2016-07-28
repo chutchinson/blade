@@ -17,6 +17,7 @@ public abstract class AbstractNode implements Node {
 
   protected final SourceRange range;
   protected final NodeAttributeCollection attributes;
+  private Node parent;
   private Symbol symbol;
 
   public AbstractNode(SourceRange range) {
@@ -24,6 +25,14 @@ public abstract class AbstractNode implements Node {
       throw new IllegalArgumentException();
     this.range = range;
     this.attributes = new NodeAttributeCollection();
+  }
+
+  public Node getParent() {
+    return this.parent;
+  }
+
+  public void setParent(Node node) {
+    this.parent = node;
   }
 
   public NodeAttributeCollection getAttributes() {

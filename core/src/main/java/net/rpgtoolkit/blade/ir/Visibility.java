@@ -9,9 +9,8 @@ package net.rpgtoolkit.blade.ir;
 
 public enum Visibility {
 
-    PUBLIC,
-    PRIVATE,
-    PROTECTED
-    ;
+  PUBLIC,
+  PRIVATE,
+  PROTECTED
 
 }

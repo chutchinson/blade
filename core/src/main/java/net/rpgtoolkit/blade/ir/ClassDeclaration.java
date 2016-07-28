@@ -12,44 +12,44 @@ import java.util.List;
 
 public class ClassDeclaration extends AbstractNode {
 
-    private Identifier name;
-    private final List<Identifier> inheritanceList;
-    private final List<FunctionDeclaration> functions;
-    private final List<ClassFieldDeclaration> fields;
+  private Identifier name;
+  private final List<Identifier> inheritanceList;
+  private final List<FunctionDeclaration> functions;
+  private final List<ClassFieldDeclaration> fields;
 
-    public ClassDeclaration(SourceRange range, Identifier name) {
-        super(range);
-        this.functions = new ArrayList<>();
-        this.fields = new ArrayList<>();
-        this.inheritanceList = new ArrayList<>();
-        setName(name);
-    }
+  public ClassDeclaration(SourceRange range, Identifier name) {
+    super(range);
+    this.functions = new ArrayList<>();
+    this.fields = new ArrayList<>();
+    this.inheritanceList = new ArrayList<>();
+    setName(name);
+  }
 
-    public List<Identifier> getInheritanceList() {
-        return this.inheritanceList;
-    }
+  public List<Identifier> getInheritanceList() {
+    return this.inheritanceList;
+  }
 
-    public List<FunctionDeclaration> getFunctionDeclarations() {
-        return this.functions;
-    }
+  public List<FunctionDeclaration> getFunctionDeclarations() {
+    return this.functions;
+  }
 
-    public List<ClassFieldDeclaration> getFieldDeclarations() {
-        return this.fields;
-    }
+  public List<ClassFieldDeclaration> getFieldDeclarations() {
+    return this.fields;
+  }
 
-    public Identifier getName() {
-        return this.name;
-    }
+  public Identifier getName() {
+    return this.name;
+  }
 
-    public void setName(Identifier name) {
-        if (name == null)
-            throw new IllegalArgumentException();
-        this.name = name;
-    }
+  public void setName(Identifier name) {
+    if (name == null)
+      throw new IllegalArgumentException();
+    this.name = name;
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }

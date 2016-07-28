@@ -11,34 +11,37 @@ import net.rpgtoolkit.blade.ir.*;
 
 public class IndexExpression extends AbstractNode implements Expression {
 
-    private Identifier identifier;
-    private Expression index;
+  private Identifier identifier;
+  private Expression index;
 
-    public IndexExpression(SourceRange range, Identifier ident) {
-        super(range);
-        setIdentifier(ident);
-    }
+  public IndexExpression(SourceRange range, Identifier ident) {
+    super(range);
+    setIdentifier(ident);
+  }
 
-    public Identifier getIdentifier() {
-        return this.identifier;
-    }
+  public Identifier getIdentifier() {
+    return this.identifier;
+  }
 
-    public void setIdentifier(Identifier ident) {
-        if (ident == null)
-            throw new IllegalArgumentException();
-        this.identifier = ident;
-    }
+  public void setIdentifier(Identifier ident) {
+    if (ident == null)
+      throw new IllegalArgumentException();
+    this.identifier = ident;
+    this.identifier.setParent(this);
+  }
 
-    public Expression getIndexExpression() {
-        return this.index;
-    }
+  public Expression getIndexExpression() {
+    return this.index;
+  }
 
-    public void setIndexExpression(Expression expr) {
-        this.index = expr;
-    }
+  public void setIndexExpression(Expression expr) {
+    this.index = expr;
+    if (this.index != null)
+      this.index.setParent(this);
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 }

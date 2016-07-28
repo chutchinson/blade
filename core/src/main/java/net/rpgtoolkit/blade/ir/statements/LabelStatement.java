@@ -13,26 +13,27 @@ import net.rpgtoolkit.blade.ir.SourceRange;
 
 public class LabelStatement extends AbstractStatement {
 
-    private Identifier name;
+  private Identifier name;
 
-    public LabelStatement(SourceRange range, Identifier name) {
-        super(range);
-        setName(name);
-    }
+  public LabelStatement(SourceRange range, Identifier name) {
+    super(range);
+    setName(name);
+  }
 
-    public Identifier getName() {
-        return this.name;
-    }
+  public Identifier getName() {
+    return this.name;
+  }
 
-    public void setName(Identifier name) {
-        if (name == null)
-            throw new IllegalArgumentException();
-        this.name = name;
-    }
+  public void setName(Identifier name) {
+    if (name == null)
+      throw new IllegalArgumentException();
+    this.name = name;
+    this.name.setParent(this);
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }

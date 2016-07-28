@@ -18,38 +18,42 @@ import java.util.List;
 
 public class CallExpression extends AbstractNode implements Expression {
 
-    private Expression target;
-    private final List<Expression> arguments;
+  private Expression target;
+  private final List<Expression> arguments;
 
-    public CallExpression(SourceRange range, Expression target, Collection<Expression> arguments) {
-        super(range);
-        this.arguments = new LinkedList<>();
-        setTarget(target);
-        setArguments(arguments);
-    }
+  public CallExpression(SourceRange range, Expression target, Collection<Expression> arguments) {
+    super(range);
+    this.arguments = new LinkedList<>();
+    setTarget(target);
+    setArguments(arguments);
+  }
 
-    public List<Expression> getArguments() {
-        return this.arguments;
-    }
+  public List<Expression> getArguments() {
+    return this.arguments;
+  }
 
-    public Expression getTarget() {
-        return this.target;
-    }
+  public Expression getTarget() {
+    return this.target;
+  }
 
-    public void setTarget(Expression target) {
-        if (target == null)
-            throw new IllegalArgumentException();
-        this.target = target;
-    }
+  public void setTarget(Expression target) {
+    if (target == null)
+      throw new IllegalArgumentException();
+    this.target = target;
+    this.target.setParent(this);
+  }
 
-    public void setArguments(Collection<Expression> arguments) {
-        this.arguments.clear();
-        this.arguments.addAll(arguments);
+  public void setArguments(Collection<Expression> arguments) {
+    this.arguments.clear();
+    this.arguments.addAll(arguments);
+    for (final Expression expr : this.arguments) {
+      expr.setParent(this);
     }
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }

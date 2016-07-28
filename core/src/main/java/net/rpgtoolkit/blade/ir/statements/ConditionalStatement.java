@@ -11,38 +11,40 @@ import net.rpgtoolkit.blade.ir.*;
 
 public class ConditionalStatement extends AbstractStatement {
 
-    private Expression condition;
-    private Block body;
+  private Expression condition;
+  private Block body;
 
-    public ConditionalStatement(SourceRange range, Expression expr, Block body) {
-        super(range);
-        setConditionExpression(expr);
-        setBody(body);
-    }
+  public ConditionalStatement(SourceRange range, Expression expr, Block body) {
+    super(range);
+    setConditionExpression(expr);
+    setBody(body);
+  }
 
-    public Expression getConditionExpression() {
-        return this.condition;
-    }
+  public Expression getConditionExpression() {
+    return this.condition;
+  }
 
-    public void setConditionExpression(Expression expr) {
-        if (expr == null)
-            throw new IllegalArgumentException();
-        this.condition = expr;
-    }
+  public void setConditionExpression(Expression expr) {
+    if (expr == null)
+      throw new IllegalArgumentException();
+    this.condition = expr;
+    this.condition.setParent(this);
+  }
 
-    public Block getBody() {
-        return this.body;
-    }
+  public Block getBody() {
+    return this.body;
+  }
 
-    public void setBody(Block body) {
-        if (body == null)
-            throw new IllegalArgumentException();
-        this.body = body;
-    }
+  public void setBody(Block body) {
+    if (body == null)
+      throw new IllegalArgumentException();
+    this.body = body;
+    this.body.setParent(this);
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }

@@ -13,23 +13,35 @@ import net.rpgtoolkit.blade.ir.SourceRange;
 
 public abstract class BinaryExpression extends AbstractNode implements Expression {
 
-    private Expression left;
-    private Expression right;
+  private Expression left;
+  private Expression right;
 
-    public BinaryExpression(SourceRange range, Expression left, Expression right) {
-        super(range);
-        if (left == null || right == null)
-            throw new IllegalArgumentException();
-        this.left = left;
-        this.right = right;
-    }
+  public BinaryExpression(SourceRange range, Expression left, Expression right) {
+    super(range);
+    this.setLeftExpression(left);
+    this.setRightExpression(right);
+  }
 
-    public Expression getLeftExpression() {
-        return this.left;
-    }
+  public Expression getLeftExpression() {
+    return this.left;
+  }
 
-    public Expression getRightExpression() {
-        return this.right;
-    }
+  public void setLeftExpression(Expression expr) {
+    if (expr == null)
+      throw new IllegalArgumentException();
+    this.left = expr;
+    this.left.setParent(this);
+  }
+
+  public Expression getRightExpression() {
+    return this.right;
+  }
+
+  public void setRightExpression(Expression expr) {
+    if (expr == null)
+      throw new IllegalArgumentException();
+    this.right = expr;
+    this.right.setParent(this);
+  }
 
 }

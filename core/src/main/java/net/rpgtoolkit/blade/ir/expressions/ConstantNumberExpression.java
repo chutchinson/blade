@@ -13,24 +13,24 @@ import net.rpgtoolkit.blade.ir.SourceRange;
 
 public class ConstantNumberExpression extends AbstractNode implements ConstantExpression {
 
-    private double value;
+  private double value;
 
-    public ConstantNumberExpression(SourceRange range, double value) {
-        super(range);
-        this.value = value;
-    }
+  public ConstantNumberExpression(SourceRange range, double value) {
+    super(range);
+    this.value = value;
+  }
 
-    public double getValue() {
-        return this.value;
-    }
+  public double getValue() {
+    return this.value;
+  }
 
-    public void setValue(double value) {
-        this.value = value;
-    }
+  public void setValue(double value) {
+    this.value = value;
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }

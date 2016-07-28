@@ -12,30 +12,30 @@ import net.rpgtoolkit.blade.ir.SourceRange;
 
 public class FlowControlStatement extends AbstractStatement {
 
-    public enum FlowControlKind {
-        BREAK,
-        CONTINUE,
-        GOTO
-    }
+  public enum FlowControlKind {
+    BREAK,
+    CONTINUE,
+    JUMP
+  }
 
-    private FlowControlKind kind;
+  private FlowControlKind kind;
 
-    public FlowControlStatement(SourceRange range, FlowControlKind kind) {
-        super(range);
-        setKind(kind);
-    }
+  public FlowControlStatement(SourceRange range, FlowControlKind kind) {
+    super(range);
+    setKind(kind);
+  }
 
-    public FlowControlKind getKind() {
-        return this.kind;
-    }
+  public FlowControlKind getKind() {
+    return this.kind;
+  }
 
-    public void setKind(FlowControlKind kind) {
-        this.kind = kind;
-    }
+  public void setKind(FlowControlKind kind) {
+    this.kind = kind;
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }

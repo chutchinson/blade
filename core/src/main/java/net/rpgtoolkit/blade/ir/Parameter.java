@@ -24,6 +24,7 @@ public class Parameter extends AbstractNode {
     if (value == null)
       throw new IllegalArgumentException();
     this.name = value;
+    this.name.setParent(this);
   }
 
   @Override

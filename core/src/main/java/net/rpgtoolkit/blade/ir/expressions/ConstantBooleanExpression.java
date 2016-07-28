@@ -13,24 +13,24 @@ import net.rpgtoolkit.blade.ir.SourceRange;
 
 public class ConstantBooleanExpression extends AbstractNode implements ConstantExpression {
 
-    private boolean value;
+  private boolean value;
 
-    public ConstantBooleanExpression(SourceRange range, boolean value) {
-        super(range);
-        this.value = value;
-    }
+  public ConstantBooleanExpression(SourceRange range, boolean value) {
+    super(range);
+    this.value = value;
+  }
 
-    public boolean getValue() {
-        return this.value;
-    }
+  public boolean getValue() {
+    return this.value;
+  }
 
-    public void setValue(boolean value) {
-        this.value = value;
-    }
+  public void setValue(boolean value) {
+    this.value = value;
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }

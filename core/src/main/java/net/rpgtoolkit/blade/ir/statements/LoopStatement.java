@@ -11,51 +11,52 @@ import net.rpgtoolkit.blade.ir.*;
 
 public class LoopStatement extends AbstractStatement {
 
-    public enum LoopKind {
-        DO,
-        WHILE,
-        UNTIL
-    }
+  public enum LoopKind {
+    DO,
+    WHILE,
+    UNTIL
+  }
 
-    private LoopKind kind;
-    private Expression condition;
-    private Block body;
+  private LoopKind kind;
+  private Expression condition;
+  private Block body;
 
-    public LoopStatement(SourceRange range, LoopKind kind, Expression condition) {
-        super(range);
-        setKind(kind);
-        setCondition(condition);
-    }
+  public LoopStatement(SourceRange range, LoopKind kind, Expression condition) {
+    super(range);
+    setKind(kind);
+    setCondition(condition);
+  }
 
-    public LoopKind getKind() {
-        return this.kind;
-    }
+  public LoopKind getKind() {
+    return this.kind;
+  }
 
-    public void setKind(LoopKind kind) {
-        this.kind = kind;
-    }
+  public void setKind(LoopKind kind) {
+    this.kind = kind;
+  }
 
-    public Expression getCondition() {
-        return this.condition;
-    }
+  public Expression getCondition() {
+    return this.condition;
+  }
 
-    public void setCondition(Expression condition) {
-        if (condition == null)
-            throw new IllegalArgumentException();
-        this.condition = condition;
-    }
+  public void setCondition(Expression condition) {
+    if (condition == null)
+      throw new IllegalArgumentException();
+    this.condition = condition;
+    this.condition.setParent(this);
+  }
 
-    public Block getBody() {
-        return this.body;
-    }
+  public Block getBody() {
+    return this.body;
+  }
 
-    public void setBody(Block body) {
-        this.body = body;
-    }
+  public void setBody(Block body) {
+    this.body = body;
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }

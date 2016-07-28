@@ -14,63 +14,65 @@ import net.rpgtoolkit.blade.ir.SourceRange;
 
 public class AssignmentExpression extends AbstractNode implements Expression {
 
-    public enum Operator {
-        ASSIGN,
-        ASSIGN_ADD,
-        ASSIGN_SUB,
-        ASSIGN_MUL,
-        ASSIGN_DIV,
-        ASSIGN_MOD,
-        ASSIGN_POW,
-        ASSIGN_SHL,
-        ASSIGN_SHR,
-        ASSIGN_AND,
-        ASSIGN_OR,
-        ASSIGN_XOR
-    }
+  public enum Operator {
+    ASSIGN,
+    ASSIGN_ADD,
+    ASSIGN_SUB,
+    ASSIGN_MUL,
+    ASSIGN_DIV,
+    ASSIGN_MOD,
+    ASSIGN_POW,
+    ASSIGN_SHL,
+    ASSIGN_SHR,
+    ASSIGN_AND,
+    ASSIGN_OR,
+    ASSIGN_XOR
+  }
 
-    private Operator op;
-    private Expression symbol;
-    private Expression value;
+  private Operator op;
+  private Expression symbol;
+  private Expression value;
 
-    public AssignmentExpression(SourceRange range, Operator op, Expression sym, Expression value) {
-        super(range);
-        setOperator(op);
-        setSymbolExpression(sym);
-        setValueExpression(value);
-    }
+  public AssignmentExpression(SourceRange range, Operator op, Expression sym, Expression value) {
+    super(range);
+    setOperator(op);
+    setSymbolExpression(sym);
+    setValueExpression(value);
+  }
 
-    public Operator getOperator() {
-        return this.op;
-    }
+  public Operator getOperator() {
+    return this.op;
+  }
 
-    public void setOperator(Operator op) {
-        this.op = op;
-    }
+  public void setOperator(Operator op) {
+    this.op = op;
+  }
 
-    public Expression getSymbolExpression() {
-        return this.symbol;
-    }
+  public Expression getSymbolExpression() {
+    return this.symbol;
+  }
 
-    public void setSymbolExpression(Expression sym) {
-        if (sym == null)
-            throw new IllegalArgumentException();
-        this.symbol = sym;
-    }
+  public void setSymbolExpression(Expression sym) {
+    if (sym == null)
+      throw new IllegalArgumentException();
+    this.symbol = sym;
+    this.symbol.setParent(this);
+  }
 
-    public Expression getValueExpression() {
-        return this.value;
-    }
+  public Expression getValueExpression() {
+    return this.value;
+  }
 
-    public void setValueExpression(Expression value) {
-        if (value == null)
-            throw new IllegalArgumentException();
-        this.value = value;
-    }
+  public void setValueExpression(Expression value) {
+    if (value == null)
+      throw new IllegalArgumentException();
+    this.value = value;
+    this.value.setParent(this);
+  }
 
-    @Override
-    public void accept(NodeVisitor visitor) {
-        visitor.visit(this);
-    }
+  @Override
+  public void accept(NodeVisitor visitor) {
+    visitor.visit(this);
+  }
 
 }
