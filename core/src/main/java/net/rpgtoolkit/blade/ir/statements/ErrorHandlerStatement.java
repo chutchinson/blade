@@ -22,9 +22,9 @@ public class ErrorHandlerStatement extends AbstractStatement {
   private ErrorHandlerKind kind;
   private Identifier label;
 
-  public ErrorHandlerStatement(SourceRange range) {
+  public ErrorHandlerStatement(SourceRange range, ErrorHandlerKind kind) {
     super(range);
-    this.kind = ErrorHandlerKind.THROW;
+    this.setKind(kind);
   }
 
   public ErrorHandlerKind getKind() {

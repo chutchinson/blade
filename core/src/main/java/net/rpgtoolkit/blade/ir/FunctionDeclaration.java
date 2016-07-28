@@ -7,13 +7,10 @@
  */
 package net.rpgtoolkit.blade.ir;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class FunctionDeclaration extends AbstractNode {
 
   private Identifier name;
-  private List<Parameter> parameters;
+  private NodeCollection<Parameter> parameters;
   private Block body;
   private Visibility visibility;
   private boolean inline;
@@ -25,7 +22,7 @@ public class FunctionDeclaration extends AbstractNode {
     if (name == null)
       throw new IllegalArgumentException();
     this.name = name;
-    this.parameters = new ArrayList<>();
+    this.parameters = new LinkedNodeCollection<>(this);
     this.visibility = Visibility.PUBLIC;
     this.inline = false;
     this.pure = false;
@@ -67,7 +64,7 @@ public class FunctionDeclaration extends AbstractNode {
     this.name = value;
   }
 
-  public List<Parameter> getParameters() {
+  public NodeCollection<Parameter> getParameters() {
     return this.parameters;
   }
 

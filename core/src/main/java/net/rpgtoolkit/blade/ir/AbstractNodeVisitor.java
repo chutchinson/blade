@@ -39,7 +39,8 @@ public abstract class AbstractNodeVisitor implements NodeVisitor {
   }
 
   public void visit(Block node) {
-    for (final Statement stmt : node) {
+    final NodeCollection<Statement> statements = node.getStatements();
+    for (final Statement stmt : statements) {
       stmt.accept(this);
     }
   }

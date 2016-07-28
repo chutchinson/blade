@@ -7,33 +7,30 @@
  */
 package net.rpgtoolkit.blade.ir;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ClassDeclaration extends AbstractNode {
 
   private Identifier name;
-  private final List<Identifier> inheritanceList;
-  private final List<FunctionDeclaration> functions;
-  private final List<ClassFieldDeclaration> fields;
+  private final NodeCollection<Identifier> inheritanceList;
+  private final NodeCollection<FunctionDeclaration> functions;
+  private final NodeCollection<ClassFieldDeclaration> fields;
 
   public ClassDeclaration(SourceRange range, Identifier name) {
     super(range);
-    this.functions = new ArrayList<>();
-    this.fields = new ArrayList<>();
-    this.inheritanceList = new ArrayList<>();
+    this.functions = new LinkedNodeCollection<>(this);
+    this.fields = new LinkedNodeCollection<>(this);
+    this.inheritanceList = new LinkedNodeCollection<>(this);
     setName(name);
   }
 
-  public List<Identifier> getInheritanceList() {
+  public NodeCollection<Identifier> getInheritanceList() {
     return this.inheritanceList;
   }
 
-  public List<FunctionDeclaration> getFunctionDeclarations() {
+  public NodeCollection<FunctionDeclaration> getFunctionDeclarations() {
     return this.functions;
   }
 
-  public List<ClassFieldDeclaration> getFieldDeclarations() {
+  public NodeCollection<ClassFieldDeclaration> getFieldDeclarations() {
     return this.fields;
   }
 
